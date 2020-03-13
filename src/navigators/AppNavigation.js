@@ -1,10 +1,11 @@
-import React, {useEffect, useState, useMemo} from 'react';
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomTabNavigation from './BottomTabNavigation';
 import WelcomePage from '../pages/WelcomePage';
 import DetailPage from '../pages/DetailPage';
-import {connect} from 'react-redux';
+import DataStoreDemoPage from '../pages/DataStoreDemoPage';
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,10 @@ const AppNavigation = props => {
               options={{
                 headerBackTitle: 'Go Back',
               }}
+            />
+            <Stack.Screen
+              name="DataStoreDemoPage"
+              component={DataStoreDemoPage}
             />
           </>
         )}

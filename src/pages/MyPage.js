@@ -10,6 +10,10 @@ const MyPage = props => {
         title="Go to detail page"
         onPress={() => props.navigation.navigate('DetailPage')}
       />
+      <Button
+        title="go DataStoreDemo Page"
+        onPress={() => props.navigation.navigate('DataStoreDemoPage')}
+      />
     </View>
   );
 };
