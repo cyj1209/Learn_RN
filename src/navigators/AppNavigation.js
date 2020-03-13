@@ -16,8 +16,11 @@ const AppNavigation = props => {
 
   function setTheme(newTheme) {
     setNowTheme({
-      ...nowTheme,
-      ...newTheme,
+      dark: newTheme.dark || nowTheme.dark,
+      colors: {
+        ...nowTheme.colors,
+        ...newTheme.colors,
+      },
     });
   }
 
@@ -45,7 +48,6 @@ const AppNavigation = props => {
             }}
           />
         ) : (
-          // <Stack.Navigator>
           <>
             <Stack.Screen
               name="BottomTabRoute"
@@ -62,7 +64,6 @@ const AppNavigation = props => {
               }}
             />
           </>
-          // </Stack.Navigator>
         )}
       </Stack.Navigator>
     </NavigationContainer>

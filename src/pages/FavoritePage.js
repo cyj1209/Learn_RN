@@ -10,7 +10,7 @@ const FavoritePage = props => {
         title="set orange"
         onPress={() =>
           props.setTheme({
-            dark: true,
+            dark: false,
             colors: {
               primary: 'orange',
             },
