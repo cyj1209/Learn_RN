@@ -1,42 +1,22 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-
+import {connect} from 'react-redux';
 import PopularPage from '../pages/PopularPage';
 import TrendingPage from '../pages/TrendingPage';
 import FavoritePage from '../pages/FavoritePage';
 import MyPage from '../pages/MyPage';
-
+import {themeChange} from '../redux/action/theme';
 const BottomTab = createBottomTabNavigator();
 
 const BottomTabNavigation = props => {
-  const {setTheme} = props;
-
-  const TrendingRoute = useMemo(
-    () => props => <TrendingPage {...props} setTheme={setTheme} />,
-    [],
-  );
-
-  const PopularRoute = useMemo(
-    () => props => <PopularPage {...props} setTheme={setTheme} />,
-    [],
-  );
-  const FavoriteRoute = useMemo(
-    () => props => <FavoritePage {...props} setTheme={setTheme} />,
-    [],
-  );
-  const MyRoute = useMemo(
-    () => props => <MyPage {...props} setTheme={setTheme} />,
-    [],
-  );
-
   return (
     <BottomTab.Navigator initialRouteName="PopularPage">
       <BottomTab.Screen
         name="PopularPage"
-        component={PopularRoute}
+        component={PopularPage}
         options={{
           header: () => null,
           tabBarLabel: '最热',
@@ -47,7 +27,7 @@ const BottomTabNavigation = props => {
       />
       <BottomTab.Screen
         name="TrendingPage"
-        component={TrendingRoute}
+        component={TrendingPage}
         options={{
           tabBarLabel: '趋势',
           tabBarIcon: ({color, focused}) => {
@@ -57,7 +37,7 @@ const BottomTabNavigation = props => {
       />
       <BottomTab.Screen
         name="FavoritePage"
-        component={FavoriteRoute}
+        component={FavoritePage}
         options={{
           tabBarLabel: '收藏',
           tabBarIcon: ({color, focused}) => {
@@ -67,7 +47,7 @@ const BottomTabNavigation = props => {
       />
       <BottomTab.Screen
         name="MyPage"
-        component={MyRoute}
+        component={MyPage}
         options={{
           tabBarLabel: '我的',
           tabBarIcon: ({color, focused}) => {
@@ -79,4 +59,4 @@ const BottomTabNavigation = props => {
   );
 };
 
-export default BottomTabNavigation;
+export default connect(() => ({}), {themeChange})(BottomTabNavigation);

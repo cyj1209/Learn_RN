@@ -1,5 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
+import {connect} from 'react-redux';
+import {themeChange} from '../redux/action/theme';
 
 const TrendingPage = props => {
   console.log('here is Trending page');
@@ -9,8 +11,8 @@ const TrendingPage = props => {
       <Text>TrendingPage</Text>
       <Button
         title="set red"
-        onPress={e => {
-          props.setTheme({
+        onPress={() => {
+          props.themeChange({
             colors: {
               primary: 'red',
             },
@@ -21,7 +23,7 @@ const TrendingPage = props => {
   );
 };
 
-export default TrendingPage;
+export default connect(null, {themeChange})(TrendingPage);
 
 const styles = StyleSheet.create({
   container: {

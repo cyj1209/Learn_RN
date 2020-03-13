@@ -1,5 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
+import {connect} from 'react-redux';
+import {themeChange} from '../redux/action/theme';
 
 const FavoritePage = props => {
   console.log('here is favorite page');
@@ -9,7 +11,7 @@ const FavoritePage = props => {
       <Button
         title="set orange"
         onPress={() =>
-          props.setTheme({
+          props.themeChange({
             dark: false,
             colors: {
               primary: 'orange',
@@ -21,7 +23,7 @@ const FavoritePage = props => {
   );
 };
 
-export default FavoritePage;
+export default connect(null, {themeChange})(FavoritePage);
 
 const styles = StyleSheet.create({
   container: {

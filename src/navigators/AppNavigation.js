@@ -4,30 +4,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 import BottomTabNavigation from './BottomTabNavigation';
 import WelcomePage from '../pages/WelcomePage';
 import DetailPage from '../pages/DetailPage';
+import {connect} from 'react-redux';
 
 const Stack = createStackNavigator();
 
 const AppNavigation = props => {
-  // 我想要一个定时器，到时间了切换路由
   console.log('here is app navigation');
   console.log(props);
   const [isWelcomeTime, setIsWelcomeTime] = useState(true);
-  const [nowTheme, setNowTheme] = useState(DefaultTheme);
-
-  function setTheme(newTheme) {
-    setNowTheme({
-      dark: newTheme.dark || nowTheme.dark,
-      colors: {
-        ...nowTheme.colors,
-        ...newTheme.colors,
-      },
-    });
-  }
-
-  const BottomTabRoute = useMemo(
-    () => props => <BottomTabNavigation {...props} setTheme={setTheme} />,
-    [],
-  );
 
   useEffect(() => {
     let timer = setTimeout(() => setIsWelcomeTime(false), 500);
@@ -37,7 +21,7 @@ const AppNavigation = props => {
   }, []);
 
   return (
-    <NavigationContainer theme={nowTheme}>
+    <NavigationContainer theme={props.theme}>
       <Stack.Navigator>
         {isWelcomeTime ? (
           <Stack.Screen
@@ -51,7 +35,7 @@ const AppNavigation = props => {
           <>
             <Stack.Screen
               name="BottomTabRoute"
-              component={BottomTabRoute}
+              component={BottomTabNavigation}
               options={{
                 header: () => null,
               }}
@@ -70,4 +54,4 @@ const AppNavigation = props => {
   );
 };
 
-export default AppNavigation;
+export default connect(state => ({theme: state.theme}))(AppNavigation);
